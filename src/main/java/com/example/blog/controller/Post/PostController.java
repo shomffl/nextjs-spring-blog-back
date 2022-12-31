@@ -42,6 +42,7 @@ public class PostController {
    * @return 保存データ
    */
   @PostMapping("/api/posts")
+  @CrossOrigin(origins = "http://localhost:3000")
   public PostDTO savePost(@RequestBody PostForm postForm) {
     return postService.savePost(postForm);
   }
