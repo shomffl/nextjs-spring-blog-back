@@ -14,6 +14,8 @@ public class PostController {
 
   private final PostService postService;
 
+  private final String FRONT_URL = "http://localhost:3000";
+
   /**
    * 投稿全件取得処理
    *
@@ -42,8 +44,21 @@ public class PostController {
    * @return 保存データ
    */
   @PostMapping("/api/posts")
-  @CrossOrigin(origins = "http://localhost:3000")
+  @CrossOrigin(origins = FRONT_URL)
   public PostDTO savePost(@RequestBody PostForm postForm) {
     return postService.savePost(postForm);
+  }
+
+  /**
+   * 投稿編集処理
+   *
+   * @param id 投稿id
+   * @param postForm 入力値
+   * @return 保存データ
+   */
+  @PutMapping("/api/posts/edit/{id}")
+  @CrossOrigin(origins = FRONT_URL)
+  public PostDTO editPost(@PathVariable("id") Long id, @RequestBody PostForm postForm) {
+    return postService.updatePost(id, postForm);
   }
 }
