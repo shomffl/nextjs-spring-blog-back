@@ -1,11 +1,10 @@
 package com.example.blog.controller.Post;
 
 import com.example.blog.dto.Post.PostDTO;
+import com.example.blog.form.Post.PostForm;
 import com.example.blog.service.Post.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +33,16 @@ public class PostController {
   @GetMapping("/api/posts/{id}")
   public PostDTO getPost(@PathVariable("id") Long id) {
     return postService.searchPostById(id);
+  }
+
+  /**
+   * 投稿保存処理
+   *
+   * @param postForm 入力値
+   * @return 保存データ
+   */
+  @PostMapping("/api/posts")
+  public PostDTO savePost(@RequestBody PostForm postForm) {
+    return postService.savePost(postForm);
   }
 }

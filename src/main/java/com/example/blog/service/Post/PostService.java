@@ -1,6 +1,8 @@
 package com.example.blog.service.Post;
 
 import com.example.blog.dto.Post.PostDTO;
+import com.example.blog.entity.Post.Post;
+import com.example.blog.form.Post.PostForm;
 import com.example.blog.repository.Post.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,5 +34,15 @@ public class PostService {
    */
   public PostDTO searchPostById(Long id) {
     return PostDTO.of(postRepository.findById(id).get());
+  }
+
+  /**
+   * 投稿保存処理
+   *
+   * @param postForm 入力値
+   * @return 保存データ
+   */
+  public PostDTO savePost(PostForm postForm) {
+    return PostDTO.of(postRepository.save(Post.of(postForm)));
   }
 }
