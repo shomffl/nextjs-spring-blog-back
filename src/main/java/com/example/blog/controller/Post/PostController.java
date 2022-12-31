@@ -61,4 +61,15 @@ public class PostController {
   public PostDTO editPost(@PathVariable("id") Long id, @RequestBody PostForm postForm) {
     return postService.updatePost(id, postForm);
   }
+
+  /**
+   * 投稿削除処理
+   *
+   * @param id 投稿id
+   */
+  @DeleteMapping("/api/posts/{id}")
+  @CrossOrigin(origins = FRONT_URL)
+  public void deletePost(@PathVariable("id") Long id) {
+    postService.deletePost(id);
+  }
 }

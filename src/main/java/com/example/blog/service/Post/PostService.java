@@ -59,4 +59,13 @@ public class PostService {
     post.setBody(postForm.getBody());
     return PostDTO.of(postRepository.save(post));
   }
+
+  /**
+   * 投稿削除処理
+   *
+   * @param id 投稿id
+   */
+  public void deletePost(Long id) {
+    postRepository.deleteById(id);
+  }
 }
