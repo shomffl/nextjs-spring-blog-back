@@ -6,6 +6,7 @@ import com.example.blog.service.Post.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -45,7 +46,7 @@ public class PostController {
    */
   @PostMapping("/api/posts")
   @CrossOrigin(origins = FRONT_URL)
-  public PostDTO savePost(@RequestBody PostForm postForm) {
+  public PostDTO savePost(@Valid @RequestBody PostForm postForm) {
     return postService.savePost(postForm);
   }
 
