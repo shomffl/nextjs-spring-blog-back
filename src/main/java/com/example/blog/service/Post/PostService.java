@@ -45,4 +45,27 @@ public class PostService {
   public PostDTO savePost(PostForm postForm) {
     return PostDTO.of(postRepository.save(Post.of(postForm)));
   }
+
+  /**
+   * 投稿更新処理
+   *
+   * @param id 投稿id
+   * @param postForm 入力値
+   * @return 保存データ
+   */
+  public PostDTO updatePost(Long id, PostForm postForm) {
+    Post post = postRepository.findById(id).get();
+    post.setTitle(postForm.getTitle());
+    post.setBody(postForm.getBody());
+    return PostDTO.of(postRepository.save(post));
+  }
+
+  /**
+   * 投稿削除処理
+   *
+   * @param id 投稿id
+   */
+  public void deletePost(Long id) {
+    postRepository.deleteById(id);
+  }
 }

@@ -6,6 +6,7 @@ import com.example.blog.service.Post.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -13,6 +14,8 @@ import java.util.List;
 public class PostController {
 
   private final PostService postService;
+
+  private final String FRONT_URL = "http://localhost:3000";
 
   /**
    * 投稿全件取得処理
@@ -42,8 +45,32 @@ public class PostController {
    * @return 保存データ
    */
   @PostMapping("/api/posts")
-  @CrossOrigin(origins = "http://localhost:3000")
-  public PostDTO savePost(@RequestBody PostForm postForm) {
+  @CrossOrigin(origins = FRONT_URL)
+  public PostDTO savePost(@Valid @RequestBody PostForm postForm) {
     return postService.savePost(postForm);
+  }
+
+  /**
+   * 投稿編集処理
+   *
+   * @param id 投稿id
+   * @param postForm 入力値
+   * @return 保存データ
+   */
+  @PutMapping("/api/posts/edit/{id}")
+  @CrossOrigin(origins = FRONT_URL)
+  public PostDTO editPost(@PathVariable("id") Long id, @RequestBody PostForm postForm) {
+    return postService.updatePost(id, postForm);
+  }
+
+  /**
+   * 投稿削除処理
+   *
+   * @param id 投稿id
+   */
+  @DeleteMapping("/api/posts/{id}")
+  @CrossOrigin(origins = FRONT_URL)
+  public void deletePost(@PathVariable("id") Long id) {
+    postService.deletePost(id);
   }
 }
