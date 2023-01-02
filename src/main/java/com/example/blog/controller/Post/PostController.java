@@ -45,7 +45,6 @@ public class PostController {
    * @return 保存データ
    */
   @PostMapping("/api/posts")
-  @CrossOrigin(origins = FRONT_URL)
   public PostDTO savePost(@Valid @RequestBody PostForm postForm) {
     return postService.savePost(postForm);
   }
@@ -58,7 +57,6 @@ public class PostController {
    * @return 保存データ
    */
   @PutMapping("/api/posts/edit/{id}")
-  @CrossOrigin(origins = FRONT_URL)
   public PostDTO editPost(@PathVariable("id") Long id, @RequestBody PostForm postForm) {
     return postService.updatePost(id, postForm);
   }
@@ -69,7 +67,6 @@ public class PostController {
    * @param id 投稿id
    */
   @DeleteMapping("/api/posts/{id}")
-  @CrossOrigin(origins = FRONT_URL)
   public void deletePost(@PathVariable("id") Long id) {
     postService.deletePost(id);
   }
